@@ -1,0 +1,359 @@
+/**
+ * Wetter Vorhersage - CSS Stylesheet
+ * Version: 2.0.0
+ *
+ * Nutzt CSS-Variablen für vollständige Konfigurierbarkeit
+ */
+
+:root {
+    /* Standard-Werte (werden durch Plugin-Optionen überschrieben) */
+    --wetter-text-color: #333333;
+    --wetter-bg-color: #ffffff;
+    --wetter-accent-color: #f7971e;
+    --wetter-card-width: 400px;
+    --wetter-font-size: 1rem;
+    --wetter-icon-brightness: 1;
+}
+
+/* ============================================================================
+   HAUPTCONTAINER
+   ============================================================================ */
+
+.wetter-karte {
+    max-width: var(--wetter-card-width);
+    width: 100%;
+    margin: 20px auto;
+    background: var(--wetter-bg-color);
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    font-size: var(--wetter-font-size);
+    color: var(--wetter-text-color);
+}
+
+/* ============================================================================
+   TODAY CARD - Aktueller Tag (großer Block)
+   ============================================================================ */
+
+.wetter-heute-card {
+    background: linear-gradient(180deg, #f8f9fa 0%, var(--wetter-bg-color) 100%);
+    padding: 30px 20px;
+}
+
+.wetter-ort-gross {
+    margin: 0 0 25px 0;
+    font-size: calc(var(--wetter-font-size) * 1.6);
+    font-weight: 700;
+    color: var(--wetter-accent-color);
+    letter-spacing: 1.5px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.wetter-heute-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.wetter-icon-heute {
+    color: var(--wetter-accent-color);
+    filter: brightness(var(--wetter-icon-brightness));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wetter-icon-heute svg {
+    width: 120px !important;
+    height: 120px !important;
+}
+
+.wetter-temp-heute {
+    font-size: calc(var(--wetter-font-size) * 4.5);
+    font-weight: 700;
+    color: var(--wetter-text-color);
+    line-height: 1;
+}
+
+.wetter-temp-heute .grad {
+    font-size: 0.45em;
+    font-weight: 400;
+    opacity: 0.7;
+}
+
+.wetter-beschreibung-heute {
+    font-size: calc(var(--wetter-font-size) * 1.3);
+    color: var(--wetter-text-color);
+    font-weight: 500;
+    opacity: 0.85;
+    text-align: center;
+}
+
+.wetter-heute-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 20px;
+    background: rgba(0, 0, 0, 0.03);
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    margin-top: 20px;
+}
+
+.meta-datum {
+    font-size: calc(var(--wetter-font-size) * 0.95);
+    color: var(--wetter-text-color);
+    opacity: 0.7;
+    font-weight: 500;
+}
+
+.meta-minmax {
+    font-size: calc(var(--wetter-font-size) * 1.15);
+    font-weight: 600;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.meta-minmax .temp-min {
+    color: #5b9bd5;
+}
+
+.meta-minmax .separator {
+    color: var(--wetter-text-color);
+    opacity: 0.4;
+}
+
+.meta-minmax .temp-max {
+    color: #ff6b6b;
+}
+
+/* ============================================================================
+   VORSCHAU - Horizontale Leiste mit 3-5 Tagen
+   ============================================================================ */
+
+.wetter-vorschau-leiste {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+    gap: 0;
+    padding: 20px 10px;
+    background: var(--wetter-bg-color);
+}
+
+.vorschau-tag {
+    text-align: center;
+    padding: 15px 8px;
+    border-right: 1px solid rgba(0, 0, 0, 0.08);
+    transition: background 0.2s ease;
+}
+
+.vorschau-tag:last-child {
+    border-right: none;
+}
+
+.vorschau-tag:hover {
+    background: rgba(0, 0, 0, 0.02);
+}
+
+.tag-label {
+    font-size: calc(var(--wetter-font-size) * 0.95);
+    font-weight: 600;
+    color: var(--wetter-text-color);
+    margin-bottom: 4px;
+}
+
+.tag-datum {
+    font-size: calc(var(--wetter-font-size) * 0.8);
+    color: var(--wetter-text-color);
+    opacity: 0.5;
+    margin-bottom: 12px;
+}
+
+.tag-icon {
+    margin: 12px auto;
+    color: var(--wetter-accent-color);
+    filter: brightness(var(--wetter-icon-brightness));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tag-icon svg {
+    width: 45px !important;
+    height: 45px !important;
+}
+
+.tag-temp {
+    font-size: calc(var(--wetter-font-size) * 0.9);
+    color: var(--wetter-text-color);
+    margin-top: 10px;
+    font-weight: 500;
+    opacity: 0.85;
+}
+
+/* ============================================================================
+   FOOTER
+   ============================================================================ */
+
+.wetter-footer {
+    text-align: center;
+    padding: 15px 20px;
+    background: rgba(0, 0, 0, 0.02);
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.wetter-footer small {
+    color: var(--wetter-text-color);
+    opacity: 0.6;
+    font-size: calc(var(--wetter-font-size) * 0.85);
+}
+
+.wetter-footer a {
+    color: var(--wetter-accent-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.wetter-footer a:hover {
+    text-decoration: underline;
+}
+
+/* ============================================================================
+   FEHLERANZEIGE
+   ============================================================================ */
+
+.wetter-error {
+    max-width: var(--wetter-card-width);
+    width: 100%;
+    margin: 20px auto;
+    background: #f8d7da;
+    color: #721c24;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #f5c6cb;
+    font-size: var(--wetter-font-size);
+    text-align: center;
+}
+
+.wetter-error a {
+    color: #721c24;
+    font-weight: 600;
+}
+
+/* ============================================================================
+   RESPONSIVE DESIGN
+   ============================================================================ */
+
+@media (max-width: 500px) {
+    .wetter-karte {
+        margin: 10px;
+        border-radius: 12px;
+    }
+
+    .wetter-ort-gross {
+        font-size: calc(var(--wetter-font-size) * 1.4);
+    }
+
+    .wetter-icon-heute svg {
+        width: 90px !important;
+        height: 90px !important;
+    }
+
+    .wetter-temp-heute {
+        font-size: calc(var(--wetter-font-size) * 3.5);
+    }
+
+    .wetter-beschreibung-heute {
+        font-size: calc(var(--wetter-font-size) * 1.1);
+    }
+
+    .wetter-vorschau-leiste {
+        grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+        padding: 15px 5px;
+    }
+
+    .vorschau-tag {
+        padding: 12px 5px;
+    }
+
+    .tag-icon svg {
+        width: 38px !important;
+        height: 38px !important;
+    }
+
+    .tag-temp {
+        font-size: calc(var(--wetter-font-size) * 0.8);
+    }
+}
+
+@media (max-width: 380px) {
+    .wetter-heute-meta {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+
+    .vorschau-tag {
+        padding: 10px 3px;
+    }
+
+    .tag-label {
+        font-size: calc(var(--wetter-font-size) * 0.85);
+    }
+
+    .tag-datum {
+        font-size: calc(var(--wetter-font-size) * 0.75);
+    }
+}
+
+/* ============================================================================
+   SCHRIFTGRÖSSEN-VARIANTEN
+   ============================================================================ */
+
+.wetter-karte.font-small {
+    --wetter-font-size: 0.875rem;
+}
+
+.wetter-karte.font-normal {
+    --wetter-font-size: 1rem;
+}
+
+.wetter-karte.font-large {
+    --wetter-font-size: 1.125rem;
+}
+
+/* ============================================================================
+   KARTENBREITEN-VARIANTEN
+   ============================================================================ */
+
+.wetter-karte.width-auto {
+    --wetter-card-width: 100%;
+    max-width: 600px;
+}
+
+.wetter-karte.width-small {
+    --wetter-card-width: 320px;
+}
+
+.wetter-karte.width-medium {
+    --wetter-card-width: 400px;
+}
+
+.wetter-karte.width-large {
+    --wetter-card-width: 500px;
+}
+
+/* ============================================================================
+   ICON-STYLES
+   ============================================================================ */
+
+.wetter-karte.icons-dark {
+    --wetter-icon-brightness: 0.7;
+}
+
+.wetter-karte.icons-light {
+    --wetter-icon-brightness: 1.2;
+}
