@@ -1,0 +1,65 @@
+name: Create Release ZIP
+
+on:
+  release:
+    types: [created]
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    name: Build and Upload Release Asset
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Get version from tag
+        id: get_version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+
+      - name: Create plugin directory structure
+        run: |
+          mkdir -p build/wetter-vorhersage
+
+          # Kopiere alle notwendigen Dateien (exkludiere Git/GitHub-Dateien)
+          rsync -av \
+            --exclude='.git*' \
+            --exclude='.github' \
+            --exclude='build' \
+            --exclude='node_modules' \
+            --exclude='.DS_Store' \
+            --exclude='*.log' \
+            --exclude='VERTEILUNG.md' \
+            ./ build/wetter-vorhersage/
+
+      - name: Create ZIP archive
+        run: |
+          cd build
+          zip -r ../wetter-vorhersage-${{ steps.get_version.outputs.VERSION }}.zip wetter-vorhersage/
+          cd ..
+
+      - name: Verify ZIP contents
+        run: |
+          echo "=== ZIP Contents ==="
+          unzip -l wetter-vorhersage-${{ steps.get_version.outputs.VERSION }}.zip | head -20
+          echo ""
+          echo "=== ZIP Size ==="
+          ls -lh wetter-vorhersage-${{ steps.get_version.outputs.VERSION }}.zip
+
+      - name: Upload Release Asset
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: wetter-vorhersage-${{ steps.get_version.outputs.VERSION }}.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: wetter-vorhersage-${{ steps.get_version.outputs.VERSION }}
+          path: wetter-vorhersage-${{ steps.get_version.outputs.VERSION }}.zip
+          retention-days: 30

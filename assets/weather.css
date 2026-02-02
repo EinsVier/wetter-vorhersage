@@ -1,0 +1,476 @@
+/**
+ * Wetter Vorhersage - CSS Stylesheet
+ * Version: 2.1.0 - Sidebar-Optimiert
+ *
+ * Nutzt CSS-Variablen für vollständige Konfigurierbarkeit
+ * Optimiert für GeneratePress Sidebar (300px Breite)
+ */
+
+:root {
+    /* Standard-Werte (werden durch Plugin-Optionen überschrieben) */
+    --wetter-text-color: #333333;
+    --wetter-bg-color: #ffffff;
+    --wetter-accent-color: #f7971e;
+    --wetter-card-width: 100%;
+    --wetter-font-size: 0.875rem;  /* Kleinere Basis-Schriftgröße für Sidebar */
+    --wetter-icon-brightness: 1;
+}
+
+/* ============================================================================
+   HAUPTCONTAINER - Sidebar-optimiert
+   ============================================================================ */
+
+.wetter-karte,
+/* GeneratePress-Kompatibilität: Höhere Spezifität */
+body .wetter-karte,
+.sidebar .wetter-karte,
+.widget-area .wetter-karte,
+.entry-content .wetter-karte,
+.site-content .wetter-karte,
+aside .wetter-karte {
+    max-width: var(--wetter-card-width);
+    width: 100%;
+    margin: 0 0 20px 0;  /* Kein Auto-Margin für Sidebar */
+    background: var(--wetter-bg-color);
+    border-radius: 12px;  /* Kleinerer Radius */
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);  /* Dezenterer Schatten */
+    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    font-size: var(--wetter-font-size);
+    color: var(--wetter-text-color);
+    line-height: 1.4;
+}
+
+/* ============================================================================
+   TODAY CARD - Kompakter für Sidebar
+   ============================================================================ */
+
+.sidebar .wetter-heute-card,
+.widget-area .wetter-heute-card,
+aside .wetter-heute-card,
+.wetter-heute-card {
+    background: linear-gradient(180deg, #f8f9fa 0%, var(--wetter-bg-color) 100%);
+    padding: 15px 12px;  /* Reduziertes Padding */
+}
+
+.sidebar .wetter-ort-gross,
+.widget-area .wetter-ort-gross,
+aside .wetter-ort-gross,
+.wetter-ort-gross {
+    margin: 0 0 12px 0;  /* Weniger Abstand */
+    font-size: calc(var(--wetter-font-size) * 1.3);  /* Kleinere Überschrift */
+    font-weight: 700;
+    color: var(--wetter-accent-color);
+    letter-spacing: 1px;  /* Weniger Spacing */
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.sidebar .wetter-heute-content,
+.widget-area .wetter-heute-content,
+aside .wetter-heute-content,
+.wetter-heute-content {
+    display: flex;
+    flex-direction: row;  /* Horizontal für Kompaktheit */
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;  /* Weniger Gap */
+}
+
+.sidebar .wetter-icon-heute,
+.widget-area .wetter-icon-heute,
+aside .wetter-icon-heute,
+.wetter-icon-heute {
+    color: var(--wetter-accent-color);
+    filter: brightness(var(--wetter-icon-brightness));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.sidebar .wetter-icon-heute svg,
+.widget-area .wetter-icon-heute svg,
+aside .wetter-icon-heute svg,
+.wetter-icon-heute svg {
+    width: 60px !important;  /* Viel kleiner */
+    height: 60px !important;
+}
+
+.sidebar .wetter-temp-heute,
+.widget-area .wetter-temp-heute,
+aside .wetter-temp-heute,
+.wetter-temp-heute {
+    font-size: calc(var(--wetter-font-size) * 3);  /* Kleinere Temperatur */
+    font-weight: 700;
+    color: var(--wetter-text-color);
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.wetter-temp-heute .grad {
+    font-size: 0.4em;
+    font-weight: 400;
+    opacity: 0.7;
+}
+
+.sidebar .wetter-beschreibung-heute,
+.widget-area .wetter-beschreibung-heute,
+aside .wetter-beschreibung-heute,
+.wetter-beschreibung-heute {
+    font-size: calc(var(--wetter-font-size) * 1);
+    color: var(--wetter-text-color);
+    font-weight: 500;
+    opacity: 0.85;
+    text-align: right;
+    flex: 1;
+}
+
+.sidebar .wetter-heute-meta,
+.widget-area .wetter-heute-meta,
+aside .wetter-heute-meta,
+.wetter-heute-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 12px;  /* Kompakteres Padding */
+    background: rgba(0, 0, 0, 0.03);
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    margin-top: 12px;  /* Weniger Abstand */
+}
+
+.meta-datum {
+    font-size: calc(var(--wetter-font-size) * 0.85);  /* Kleinerer Text */
+    color: var(--wetter-text-color);
+    opacity: 0.7;
+    font-weight: 500;
+}
+
+.meta-minmax {
+    font-size: calc(var(--wetter-font-size) * 1);
+    font-weight: 600;
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+
+.meta-minmax .temp-min {
+    color: #5b9bd5;
+}
+
+.meta-minmax .separator {
+    color: var(--wetter-text-color);
+    opacity: 0.4;
+}
+
+.meta-minmax .temp-max {
+    color: #ff6b6b;
+}
+
+/* ============================================================================
+   VORSCHAU - Horizontale Leiste (Flex-Row für Sidebar)
+   ============================================================================ */
+
+.sidebar .wetter-vorschau-leiste,
+.widget-area .wetter-vorschau-leiste,
+aside .wetter-vorschau-leiste,
+.wetter-vorschau-leiste {
+    display: flex;  /* Flex statt Grid für bessere Kontrolle */
+    flex-direction: row;  /* Explizit horizontal */
+    justify-content: space-between;
+    gap: 0;
+    padding: 12px 5px;  /* Kompakteres Padding */
+    background: var(--wetter-bg-color);
+    overflow-x: auto;  /* Scrollbar falls zu viele Tage */
+}
+
+.sidebar .vorschau-tag,
+.widget-area .vorschau-tag,
+aside .vorschau-tag,
+.vorschau-tag {
+    text-align: center;
+    padding: 8px 4px;  /* Sehr kompaktes Padding */
+    flex: 1;  /* Gleichmäßige Verteilung */
+    min-width: 50px;  /* Minimum-Breite */
+    border-right: 1px solid rgba(0, 0, 0, 0.08);
+    transition: background 0.2s ease;
+}
+
+.vorschau-tag:last-child {
+    border-right: none;
+}
+
+.vorschau-tag:hover {
+    background: rgba(0, 0, 0, 0.02);
+}
+
+.sidebar .tag-label,
+.widget-area .tag-label,
+aside .tag-label,
+.tag-label {
+    font-size: calc(var(--wetter-font-size) * 0.8);  /* Kleiner Text */
+    font-weight: 600;
+    color: var(--wetter-text-color);
+    margin-bottom: 2px;
+}
+
+.sidebar .tag-datum,
+.widget-area .tag-datum,
+aside .tag-datum,
+.tag-datum {
+    font-size: calc(var(--wetter-font-size) * 0.7);  /* Sehr klein */
+    color: var(--wetter-text-color);
+    opacity: 0.5;
+    margin-bottom: 6px;
+}
+
+.sidebar .tag-icon,
+.widget-area .tag-icon,
+aside .tag-icon,
+.tag-icon {
+    margin: 6px auto;
+    color: var(--wetter-accent-color);
+    filter: brightness(var(--wetter-icon-brightness));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sidebar .tag-icon svg,
+.widget-area .tag-icon svg,
+aside .tag-icon svg,
+.tag-icon svg {
+    width: 32px !important;  /* Viel kleinere Icons */
+    height: 32px !important;
+}
+
+.sidebar .tag-temp,
+.widget-area .tag-temp,
+aside .tag-temp,
+.tag-temp {
+    font-size: calc(var(--wetter-font-size) * 0.75);  /* Kleinere Temperatur */
+    color: var(--wetter-text-color);
+    margin-top: 4px;
+    font-weight: 500;
+    opacity: 0.85;
+    white-space: nowrap;  /* Kein Zeilenumbruch */
+}
+
+/* ============================================================================
+   FOOTER - Kompakt
+   ============================================================================ */
+
+.sidebar .wetter-footer,
+.widget-area .wetter-footer,
+aside .wetter-footer,
+.wetter-footer {
+    text-align: center;
+    padding: 8px 10px;  /* Sehr kompakt */
+    background: rgba(0, 0, 0, 0.02);
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.wetter-footer small {
+    color: var(--wetter-text-color);
+    opacity: 0.6;
+    font-size: calc(var(--wetter-font-size) * 0.75);  /* Sehr klein */
+    line-height: 1.3;
+}
+
+.wetter-footer a {
+    color: var(--wetter-accent-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.wetter-footer a:hover {
+    text-decoration: underline;
+}
+
+/* ============================================================================
+   FEHLERANZEIGE
+   ============================================================================ */
+
+.wetter-error {
+    max-width: var(--wetter-card-width);
+    width: 100%;
+    margin: 0 0 20px 0;
+    background: #f8d7da;
+    color: #721c24;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #f5c6cb;
+    font-size: var(--wetter-font-size);
+    text-align: center;
+}
+
+.wetter-error a {
+    color: #721c24;
+    font-weight: 600;
+}
+
+/* ============================================================================
+   RESPONSIVE DESIGN - Mobile
+   ============================================================================ */
+
+@media (max-width: 768px) {
+    /* In Content-Bereich (nicht Sidebar) etwas größer */
+    .entry-content .wetter-karte,
+    .site-content .wetter-karte {
+        margin: 15px auto;
+    }
+
+    .entry-content .wetter-icon-heute svg,
+    .site-content .wetter-icon-heute svg {
+        width: 80px !important;
+        height: 80px !important;
+    }
+
+    .entry-content .wetter-temp-heute,
+    .site-content .wetter-temp-heute {
+        font-size: calc(var(--wetter-font-size) * 3.5);
+    }
+}
+
+@media (max-width: 500px) {
+    /* Mobile: Noch kompakter */
+    .wetter-karte {
+        margin: 5px;
+        border-radius: 8px;
+    }
+
+    .wetter-heute-content {
+        flex-direction: column;  /* Vertikal auf Mobile */
+        gap: 8px;
+    }
+
+    .wetter-beschreibung-heute {
+        text-align: center;
+    }
+
+    .wetter-icon-heute svg {
+        width: 50px !important;
+        height: 50px !important;
+    }
+
+    .wetter-temp-heute {
+        font-size: calc(var(--wetter-font-size) * 2.5);
+    }
+
+    .wetter-vorschau-leiste {
+        padding: 10px 3px;
+    }
+
+    .vorschau-tag {
+        padding: 6px 2px;
+        min-width: 45px;
+    }
+
+    .tag-icon svg {
+        width: 28px !important;
+        height: 28px !important;
+    }
+
+    .tag-temp {
+        font-size: calc(var(--wetter-font-size) * 0.7);
+    }
+}
+
+@media (max-width: 380px) {
+    .wetter-heute-meta {
+        flex-direction: column;
+        gap: 6px;
+        text-align: center;
+        padding: 8px 10px;
+    }
+
+    .vorschau-tag {
+        padding: 5px 1px;
+        min-width: 40px;
+    }
+
+    .tag-label {
+        font-size: calc(var(--wetter-font-size) * 0.75);
+    }
+
+    .tag-datum {
+        display: none;  /* Datum verstecken bei sehr kleinen Bildschirmen */
+    }
+
+    .tag-temp {
+        font-size: calc(var(--wetter-font-size) * 0.65);
+    }
+}
+
+/* ============================================================================
+   SCHRIFTGRÖSSEN-VARIANTEN
+   ============================================================================ */
+
+.wetter-karte.font-small {
+    --wetter-font-size: 0.75rem;  /* Noch kleiner */
+}
+
+.wetter-karte.font-normal {
+    --wetter-font-size: 0.875rem;  /* Sidebar-Standard */
+}
+
+.wetter-karte.font-large {
+    --wetter-font-size: 1rem;  /* Nicht zu groß für Sidebar */
+}
+
+/* ============================================================================
+   KARTENBREITEN-VARIANTEN
+   ============================================================================ */
+
+.wetter-karte.width-auto {
+    --wetter-card-width: 100%;
+    max-width: 100%;  /* Volle Breite in Sidebar */
+}
+
+.wetter-karte.width-small {
+    --wetter-card-width: 100%;
+}
+
+.wetter-karte.width-medium {
+    --wetter-card-width: 100%;
+}
+
+.wetter-karte.width-large {
+    --wetter-card-width: 100%;
+}
+
+/* ============================================================================
+   ICON-STYLES
+   ============================================================================ */
+
+.wetter-karte.icons-dark {
+    --wetter-icon-brightness: 0.7;
+}
+
+.wetter-karte.icons-light {
+    --wetter-icon-brightness: 1.2;
+}
+
+/* ============================================================================
+   GENERATEPRESS SIDEBAR - Spezielle Anpassungen
+   ============================================================================ */
+
+/* Sidebar-Container-Spezifität */
+.sidebar .widget .wetter-karte,
+.widget-area .widget .wetter-karte,
+.secondary .wetter-karte {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+/* Sidebar-spezifische Schriftgröße überschreiben */
+.sidebar .wetter-karte,
+.widget-area .wetter-karte {
+    font-size: 0.875rem;
+}
+
+/* Widget-Titel Abstand anpassen */
+.widget .wetter-karte:first-child {
+    margin-top: 0;
+}
